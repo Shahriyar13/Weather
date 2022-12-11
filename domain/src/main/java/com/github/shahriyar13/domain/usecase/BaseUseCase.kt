@@ -9,8 +9,8 @@ abstract class BaseUseCase<in P,out R> {
      *
      * @param parameters the input parameters to run the use case with
      */
-    suspend operator fun invoke(parameters: P): AppResult<R> = execute(parameters)
+    suspend operator fun invoke(parameters: P): R = execute(parameters)
 
     @Throws(RuntimeException::class)
-    protected abstract suspend fun execute(parameters: P): AppResult<R>
+    protected abstract suspend fun execute(parameters: P): R
 }

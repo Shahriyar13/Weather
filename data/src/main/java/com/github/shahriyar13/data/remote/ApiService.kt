@@ -1,7 +1,7 @@
-package com.github.shahriyar13.data.network
+package com.github.shahriyar13.data.remote
 
 import com.github.shahriyar13.data.BuildConfig
-import com.github.shahriyar13.data.network.model.response.OneCallApiResponse
+import com.github.shahriyar13.data.remote.model.response.OneCallApiResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,6 +15,6 @@ interface ApiService {
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
         @Query("exclude") exclude: String = "minutely,hourly",
-        @Query("appid") apiKey: String = BuildConfig.OPEN_WEATHER_API_KEY
+        @Query("appid") apiKey: String = BuildConfig.API_KEY
     ): Response<OneCallApiResponse>
 }

@@ -3,6 +3,7 @@ object Versions {
 
     // Core
     const val androidCore = "1.9.0"
+    const val javaX = "1"
 
     // Android
     const val lifeCycle = "2.5.1"

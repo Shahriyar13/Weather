@@ -7,3 +7,6 @@ java {
     sourceCompatibility = Constants.javaTarget
     targetCompatibility = Constants.javaTarget
 }
+dependencies {
+    implementation(DomainImplementationDependencies.javaX)
+}
