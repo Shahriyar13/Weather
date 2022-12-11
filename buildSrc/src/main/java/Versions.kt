@@ -17,4 +17,6 @@ object Versions {
     const val espresso = "3.4.0"
 
     // Third-Party
+    const val retrofit = "2.9.0"
+    const val hilt = "2.44.2"
 }

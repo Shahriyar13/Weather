@@ -1,8 +1,10 @@
 import java.util.Properties
 
 plugins {
+    kotlin("kapt")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -79,10 +81,16 @@ dependencies {
     implementation(AppImplementationDependencies.composeMaterial)
     implementation(AppImplementationDependencies.composeUi)
     implementation(AppImplementationDependencies.composeUiToolingPreview)
+    implementation(AppImplementationDependencies.hilt)
+    kapt(AppKaptDependencies.hilt)
     testImplementation(AppTestImplementationDependencies.jUnit)
+    testImplementation(AppTestImplementationDependencies.hilt)
+    kapt(AppTestKaptDependencies.hilt)
     androidTestImplementation(AppAndroidTestImplementationDependencies.testJUnit)
     androidTestImplementation(AppAndroidTestImplementationDependencies.composeJUnit)
     androidTestImplementation(AppAndroidTestImplementationDependencies.espresso)
+    androidTestImplementation(AppAndroidTestImplementationDependencies.hilt)
+    kapt(AppAndroidTestKaptDependencies.hilt)
     debugImplementation(AppDebugImplementationDependencies.composeUiTooling)
     debugImplementation(AppDebugImplementationDependencies.composeUiTestManifest)
 }

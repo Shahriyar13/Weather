@@ -1,6 +1,10 @@
+import java.util.Properties
+
 plugins {
+    kotlin("kapt")
     id ("com.android.library")
     id ("org.jetbrains.kotlin.android")
+    id ("com.google.dagger.hilt.android")
 }
 
 android {
@@ -13,6 +17,12 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        val properties = Properties().apply {
+            load(File("$rootDir/secret.properties").reader())
+        }
+
+        buildConfigField("String", "API_KEY", "\"${properties.getProperty("apiKey")}\"")
     }
 
     buildTypes {
@@ -36,7 +46,15 @@ android {
 
 dependencies {
     implementation(DataImplementationDependencies.androidCore)
+    implementation(DataImplementationDependencies.retrofit)
+    implementation(DataImplementationDependencies.gsonByRetrofit)
+    implementation(DataImplementationDependencies.hilt)
+    kapt(DataKaptDependencies.hilt)
     testImplementation(DataTestImplementationDependencies.jUnit)
+    testImplementation(DataTestImplementationDependencies.hilt)
+    kapt(DataTestKaptDependencies.hilt)
     androidTestImplementation(DataAndroidTestImplementationDependencies.testJUnit)
     androidTestImplementation(DataAndroidTestImplementationDependencies.espresso)
+    androidTestImplementation(DataAndroidTestImplementationDependencies.hilt)
+    kapt(DataAndroidTestKaptDependencies.hilt)
 }

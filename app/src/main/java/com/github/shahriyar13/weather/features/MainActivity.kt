@@ -1,4 +1,4 @@
-package com.github.shahriyar13.weather
+package com.github.shahriyar13.weather.features
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.github.shahriyar13.weather.ui.theme.WeatherTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
