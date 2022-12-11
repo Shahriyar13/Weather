@@ -7,6 +7,7 @@ import com.github.shahriyar13.data.remote.model.mapper.mapToEntity
 import com.github.shahriyar13.domain.data
 import com.github.shahriyar13.domain.entity.CurrentWeatherEntity
 import com.github.shahriyar13.domain.entity.DailyWeatherEntity
+import com.github.shahriyar13.domain.entity.LocationEntity
 import com.github.shahriyar13.domain.repository.WeatherRepository
 
 class WeatherRepositoryImpl(
@@ -14,8 +15,12 @@ class WeatherRepositoryImpl(
     private val weatherRemoteDataSource: WeatherRemoteDataSource
 ): WeatherRepository {
 
+    override suspend fun setWeatherLocation(location: LocationEntity) {
+        weatherLocalDataSource.saveWeatherLocation(location)
+    }
+
     override suspend fun updateWeather() {
-        val weatherResult = weatherRemoteDataSource.getWeather()
+        val weatherResult = weatherRemoteDataSource.getWeather(weatherLocalDataSource.getWeatherLocation())
         weatherResult.data?.let { data ->
             weatherLocalDataSource.saveLastWeather(data)
         }
