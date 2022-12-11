@@ -45,6 +45,8 @@ android {
 }
 
 dependencies {
+    implementation(project(mapOf("path" to ":domain")))
+
     implementation(DataImplementationDependencies.androidCore)
     implementation(DataImplementationDependencies.retrofit)
     implementation(DataImplementationDependencies.gsonByRetrofit)

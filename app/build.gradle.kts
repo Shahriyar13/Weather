@@ -75,6 +75,8 @@ android {
 
 
 dependencies {
+    implementation(project(mapOf("path" to ":domain")))
+
     implementation(AppImplementationDependencies.androidCore)
     implementation(AppImplementationDependencies.lifeCycle)
     implementation(AppImplementationDependencies.activityCompose)
