@@ -1,7 +1,7 @@
-package com.github.shahriyar13.data.network
+package com.github.shahriyar13.data.remote
 
 import com.github.shahriyar13.data.BuildConfig
-import com.github.shahriyar13.data.network.model.response.OneCallApiResponse
+import com.github.shahriyar13.data.remote.model.response.OneCallApiResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

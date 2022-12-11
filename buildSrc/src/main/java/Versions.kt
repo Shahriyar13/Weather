@@ -9,6 +9,7 @@ object Versions {
     const val composeMaterial = "1.0.1"
     const val activityCompose = "1.6.1"
     const val compose = "1.3.2"
+    const val preferences = "1.2.0"
 
     // Test
     const val jUnit = "4.13.2"

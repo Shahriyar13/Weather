@@ -1,4 +1,4 @@
-package com.github.shahriyar13.data.network.model
+package com.github.shahriyar13.data.remote.model.dto
 
 data class WeatherDetailsDto(
     val id: Int,
