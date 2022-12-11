@@ -51,7 +51,6 @@ dependencies {
     implementation(DataImplementationDependencies.retrofit)
     implementation(DataImplementationDependencies.gsonByRetrofit)
     implementation(DataImplementationDependencies.hilt)
-    implementation(DataImplementationDependencies.preferences)
     kapt(DataKaptDependencies.hilt)
     testImplementation(DataTestImplementationDependencies.jUnit)
     testImplementation(DataTestImplementationDependencies.hilt)

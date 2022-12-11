@@ -3,7 +3,6 @@ object DataImplementationDependencies {
     val retrofit by lazy { "com.squareup.retrofit2:retrofit:${Versions.retrofit}" }
     val gsonByRetrofit by lazy { "com.squareup.retrofit2:converter-gson:${Versions.retrofit}" }
     val hilt by lazy { "com.google.dagger:hilt-android:${Versions.hilt}" }
-    val preferences by lazy { "aandroidx.preference:preference-ktx:${Versions.preferences}" }
 }
 
 object DataKaptDependencies {

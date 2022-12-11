@@ -15,6 +15,6 @@ interface ApiService {
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
         @Query("exclude") exclude: String = "minutely,hourly",
-        @Query("appid") apiKey: String = BuildConfig.OPEN_WEATHER_API_KEY
+        @Query("appid") apiKey: String = BuildConfig.API_KEY
     ): Response<OneCallApiResponse>
 }
