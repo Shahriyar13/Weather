@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = Constants.namespace
+    namespace = Constants.namespace + ".data"
     compileSdk = Constants.compileSdk
 
     defaultConfig {

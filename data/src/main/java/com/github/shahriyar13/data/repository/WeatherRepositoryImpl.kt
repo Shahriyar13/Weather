@@ -10,8 +10,9 @@ import com.github.shahriyar13.domain.entity.CurrentWeatherEntity
 import com.github.shahriyar13.domain.entity.DailyWeatherEntity
 import com.github.shahriyar13.domain.entity.LocationEntity
 import com.github.shahriyar13.domain.repository.WeatherRepository
+import javax.inject.Inject
 
-class WeatherRepositoryImpl(
+class WeatherRepositoryImpl @Inject constructor(
     private val weatherLocalDataSource: WeatherLocalDataSource,
     private val weatherRemoteDataSource: WeatherRemoteDataSource
 ): WeatherRepository {

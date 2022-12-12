@@ -6,14 +6,17 @@ import androidx.lifecycle.viewModelScope
 import com.github.shahriyar13.domain.AppResult
 import com.github.shahriyar13.domain.entity.CurrentWeatherEntity
 import com.github.shahriyar13.domain.entity.DailyWeatherEntity
+import com.github.shahriyar13.domain.entity.LocationEntity
 import com.github.shahriyar13.domain.usecase.GetCurrentWeatherUseCase
 import com.github.shahriyar13.domain.usecase.GetDailyWeatherUseCase
+import com.github.shahriyar13.domain.usecase.SetWeatherLocationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CurrentWeatherViewModel @Inject constructor(
+    private val setWeatherLocationUseCase: SetWeatherLocationUseCase,
     private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase,
     private val getDailyWeatherUseCase: GetDailyWeatherUseCase,
 ) : ViewModel() {
@@ -29,8 +32,27 @@ class CurrentWeatherViewModel @Inject constructor(
     var currentHumidity = mutableStateOf("")
     var currentUV = mutableStateOf("")
     init {
+        updateWeatherLocationData()
         loadCurrentWeatherData()
         loadDailyWeatherData()
+    }
+
+    fun updateWeatherLocationData() {
+        viewModelScope.launch {
+            isLoading.value = true
+            when (val result = setWeatherLocationUseCase.invoke(LocationEntity(33.44, -94.04))) {
+                is AppResult.Success -> {
+                    loadError.value = ""
+                    isLoading.value = false
+                }
+
+                is AppResult.Error -> {
+                    loadError.value = result.exception.message!!
+                    isLoading.value = false
+                }
+                else -> {}
+            }
+        }
     }
 
     fun loadDailyWeatherData() {

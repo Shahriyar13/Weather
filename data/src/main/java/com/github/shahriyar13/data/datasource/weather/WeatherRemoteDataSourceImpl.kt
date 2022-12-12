@@ -9,21 +9,23 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class WeatherRemoteDataSourceImpl @Inject constructor(
-    private val api: ApiService,
+    val api: ApiService,
 ):WeatherRemoteDataSource{
     override suspend fun getWeather(location: LocationEntity): AppResult<OneCallApiResponse> {
-        return withContext(Dispatchers.IO) {
+        try {
             val result = api.getOneCallForecast(
                 latitude = location.lat,
                 longitude = location.lng,
             )
 
-            result.body().let {
-                AppResult.Success(it)
+            result.body()?.let {
+                return AppResult.Success(it)
             }
 
-            AppResult.Error(Exception())
+            return AppResult.Error(Exception())
 
+        } catch (e: Exception) {
+            return AppResult.Error(e)
         }
     }
 }

@@ -6,7 +6,7 @@ object Constants {
     const val minSdk = 21
     const val versionCode = 1
     const val versionName = "1.0.0"
-    const val namespace = "com.github.shahriyar13.data"
+    const val namespace = "com.github.shahriyar13"
     const val jvmTarget = "1.8"
     val javaTarget = JavaVersion.VERSION_1_8
 }
