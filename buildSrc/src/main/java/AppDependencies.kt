@@ -6,10 +6,12 @@ object AppImplementationDependencies {
     val activityCompose by lazy { "androidx.activity:activity-compose:${Versions.activityCompose}" }
     val lifeCycle by lazy { "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifeCycle}" }
     val hilt by lazy { "com.google.dagger:hilt-android:${Versions.hilt}" }
+    val hiltNavigationCompose by lazy { "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationCompose}" }
 }
 
 object AppKaptDependencies {
     val hilt by lazy { "com.google.dagger:hilt-compiler:${Versions.hilt}" }
+    val hiltAndroidX by lazy { "androidx.hilt:hilt-compiler:${Versions.hiltAndroidX}" }
 }
 
 object AppTestImplementationDependencies {

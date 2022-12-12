@@ -20,4 +20,6 @@ object Versions {
     // Third-Party
     const val retrofit = "2.9.0"
     const val hilt = "2.44.2"
+    const val hiltAndroidX = "1.0.0"
+    const val hiltNavigationCompose = "1.1.0-alpha01"
 }

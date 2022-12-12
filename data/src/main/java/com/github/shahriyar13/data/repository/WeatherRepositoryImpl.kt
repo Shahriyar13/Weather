@@ -4,6 +4,7 @@ import android.text.format.DateUtils
 import com.github.shahriyar13.data.datasource.weather.WeatherLocalDataSource
 import com.github.shahriyar13.data.datasource.weather.WeatherRemoteDataSource
 import com.github.shahriyar13.data.remote.model.mapper.mapToEntity
+import com.github.shahriyar13.domain.AppResult
 import com.github.shahriyar13.domain.data
 import com.github.shahriyar13.domain.entity.CurrentWeatherEntity
 import com.github.shahriyar13.domain.entity.DailyWeatherEntity
@@ -20,20 +21,24 @@ class WeatherRepositoryImpl(
     }
 
     override suspend fun updateWeather() {
-        val weatherResult = weatherRemoteDataSource.getWeather(weatherLocalDataSource.getWeatherLocation())
-        weatherResult.data?.let { data ->
-            weatherLocalDataSource.saveLastWeather(data)
+        val locationResult = weatherLocalDataSource.getWeatherLocation()
+        locationResult.data?.let { location ->
+            val weatherResult = weatherRemoteDataSource.getWeather(location)
+            weatherResult.data?.let { data ->
+                weatherLocalDataSource.saveLastCurrentWeather(data.current.mapToEntity())
+                weatherLocalDataSource.saveLastDailyWeather(data.daily.map { daily -> daily.mapToEntity() })
+            }
         }
     }
 
-    override suspend fun getCurrentWeather(): CurrentWeatherEntity {
+    override suspend fun getCurrentWeather(): AppResult<CurrentWeatherEntity> {
         validateCachedWeather()
-        return weatherLocalDataSource.getLastWeather().data?.current!!.mapToEntity()
+        return weatherLocalDataSource.getLastCurrentWeather()
     }
 
-    override suspend fun getDailyWeather(): List<DailyWeatherEntity> {
+    override suspend fun getDailyWeather(): AppResult<List<DailyWeatherEntity>> {
         validateCachedWeather()
-        return weatherLocalDataSource.getLastWeather().data?.daily!!.map { it.mapToEntity() }
+        return weatherLocalDataSource.getLastDailyWeather()
     }
 
     private suspend fun validateCachedWeather() {
@@ -43,9 +48,9 @@ class WeatherRepositoryImpl(
     }
 
     private suspend fun isCachedWeatherValid(): Boolean {
-        val cachedCurrentWeather = weatherLocalDataSource.getLastWeather()
+        val cachedCurrentWeather = weatherLocalDataSource.getLastCurrentWeather()
         cachedCurrentWeather.data?.let {
-            return DateUtils.isToday(it.current.dt)
+            return DateUtils.isToday(it.date.time)
         }
         return false
     }
