@@ -11,10 +11,10 @@ class WeatherPreferencesImpl @Inject constructor(
 ): WeatherPreferences {
 
     override suspend fun <T> readList(key: String, javaClass: Class<T>): AppResult<List<T>> {
-        val list = sharedPreferences.getStringSet(key, null)
+        val set: Set<String>? = sharedPreferences.getStringSet(key, null)
 
         try {
-            list?.let { data ->
+            set?.let { data ->
                 val mappedList = data.map { jsonConverter.fromJson(it, javaClass) }
                 return AppResult.Success(mappedList)
             }
@@ -41,8 +41,8 @@ class WeatherPreferencesImpl @Inject constructor(
         sharedPreferences.edit().putString(key, jsonConverter.toJson(value)).apply()
     }
 
-    override suspend fun <T> save(key: String, value: List<T>) {
-        val list = value.map { jsonConverter.toJson(value) }.toSet()
-        sharedPreferences.edit().putStringSet(key, list).apply()
+    override suspend fun <T> saveList(key: String, value: List<T>) {
+        val setOfStrings: Set<String> = value.map { jsonConverter.toJson(it) }.toSet()
+        sharedPreferences.edit().putStringSet(key, setOfStrings).apply()
     }
 }

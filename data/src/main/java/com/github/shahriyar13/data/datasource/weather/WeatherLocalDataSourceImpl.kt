@@ -23,7 +23,7 @@ class WeatherLocalDataSourceImpl @Inject constructor(
     }
 
     override suspend fun saveLastDailyWeather(lastWeather: List<DailyWeatherEntity>) {
-        weatherPreferences.save(PreferencesKeys.lastDailyWeatherKey, lastWeather)
+        weatherPreferences.saveList(PreferencesKeys.lastDailyWeatherKey, lastWeather)
     }
 
     override suspend fun saveWeatherLocation(location: LocationEntity) {
