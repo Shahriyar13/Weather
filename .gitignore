@@ -11,4 +11,4 @@ local.properties
 *.apk
 *.aab
 keystore.properties
-secret.properties
+#secret.properties
